@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-undef */
+/* eslint-disable jsx-a11y/alt-text */
+import Contacts from './components/contacts/Contacts';
+import Navbar from './components/navbar/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css'
+import { Provider } from './components/Context';
+import AddContact from './components/contacts/AddContact';
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Provider>
+      <div className="App">
+      <Navbar />
+      <AddContact />
+      <Contacts />
     </div>
+    </Provider>
+
+    
   );
 }
 
