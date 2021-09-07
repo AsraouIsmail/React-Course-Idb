@@ -12,7 +12,6 @@ import { Consumer } from '../Context'
     }
 
     showContact(myMessage){
-        console.log("mouhja had chwa 5asso gha ci brade d atay", myMessage)
         this.setState({
             showContactToggle: !this.state.showContactToggle
         });

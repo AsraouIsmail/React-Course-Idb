@@ -25,8 +25,7 @@ export  class Provider extends Component {
          contacts: [
              {id:1,name: "Asraou ismail", Tel: "0611514432", email: "asraou.ismail@gmail.com"},
              {id:2,name: "Asraou abdessamad", Tel: "0619334256", email: "asraou.abdssmad@gmail.com"},
-             {id:3,name: "Bencharki Mouhja", Tel: "0610164325", email: "mimy-ben@gmail.com"},
-             {id:4,name: "Med amine", Tel: "0611513342", email: "dark-wolf@gmail.com"}
+             {id:3,name: "Med amine", Tel: "0611513342", email: "dark-wolf@gmail.com"}
          ],
          dispatch: action => this.setState(state => reducer(this.state, action))
      }
