@@ -1,18 +1,29 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable no-unused-vars */
-import axios from 'axios'
 import React, { Component } from 'react'
-import {Consumer} from '../Context'
+import axios from 'axios'
 import TextInputGroup from '../helpers/TextInputGroup'
+import { Consumer } from '../Context'
 
- class AddContact extends Component {
-     state = {
+
+ class EditContact extends Component {
+    state = {
          name: '',
          email: '',
          phone: '',
          errors: ''
      }
 
-    
+      async componentDidMount(){
+         const id = this.props.match.params.id;
+         const res = await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+
+         this.setState({
+             name: res.data.name,
+             email: res.data.email,
+             phone: res.data.phone
+         });
+     }
      onChangeInput = (e) => this.setState({[e.target.name]: e.target.value})
      submit = async (dispatch,size,e) => {
          e.preventDefault();
@@ -31,18 +42,20 @@ import TextInputGroup from '../helpers/TextInputGroup'
              return;
          }
 
-         const newContact = {
+         const upContact = {
                 name: name,
                  email: email,
                  phone: phone
 
          }
 
+         const id = this.props.match.params.id;
+
          try{
-             const res = await axios.post('https://jsonplaceholder.typicode.com/users', newContact)
+             const res = await axios.put(`https://jsonplaceholder.typicode.com/users/${id}`, upContact)
          dispatch({
-             type: 'ADD_CONTACT',
-             payload: newContact
+             type: 'UPDATE_CONTACT',
+             payload: res.data
          })
 
          }
@@ -51,8 +64,6 @@ import TextInputGroup from '../helpers/TextInputGroup'
          }
 
          
-         
-
           this.setState({
             name: '',
             email: '',
@@ -74,7 +85,7 @@ import TextInputGroup from '../helpers/TextInputGroup'
                 <form onSubmit={this.submit.bind(this, dispatch,value.contacts.length)}>
                 <div class="card">
                 <div class="card-body">
-                        <h4 class="card-title">Add Contact</h4>
+                        <h4 class="card-title">Edit Contact</h4>
                 <TextInputGroup 
                 label="Name"
                 type="text"
@@ -102,7 +113,7 @@ import TextInputGroup from '../helpers/TextInputGroup'
                 error={errors.phone}
                 />
                 
-                <button className="btn btn-success btn-block">Add new contact</button>
+                <button className="btn btn-warning btn-block">Update contact</button>
                         </div>
                     </div>
                </form> 
@@ -115,4 +126,4 @@ import TextInputGroup from '../helpers/TextInputGroup'
         
     }
 }
-export default AddContact;
+export default EditContact;

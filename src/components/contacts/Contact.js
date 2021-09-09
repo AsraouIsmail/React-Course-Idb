@@ -3,6 +3,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Consumer } from '../Context'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
  class Contact extends Component {
@@ -19,15 +21,24 @@ import { Consumer } from '../Context'
     }
 
 
-    onDeleteClick = (id, dispatch) => {
+    onDeleteClick = async (id, dispatch) => {
         // this.props. deleteContactFromChild()
+        try{
+            const res = await axios.delete('https://jsonplaceholder.typicode.com/users/'+id)
         dispatch({
             type: "DELETE_CONTACT",
             payload: id
         })
+
+        }
+        catch(e){
+            console.log(e)
+
+        }
+       
     }
     render() {
-        const {id, name, Tel, email} = this.props.data;
+        const {id, name, phone, email} = this.props.data;
         return (
 
             <Consumer>
@@ -40,6 +51,9 @@ import { Consumer } from '../Context'
                     <div className="card-body">
                         <h4 className="card-title">
                             {name} <i style={{color: 'green', cursor: 'pointer'}} onClick={this.showContact.bind(this,'a message from ismail')} className="fa fa-sort-down"></i>
+                            <Link to={`/contact/edit/${id}`}>
+                                <i className="fa fa-pencil" style={{color: 'orange', marginLeft: '15px', cursor: 'pointer'}}></i>
+                            </Link>
                             <i style={{color: 'red', margin: 25, cursor: 'pointer'}} className="fa fa-times" onClick={this.onDeleteClick.bind(this, id, dispatch)}></i>
                         </h4>
                         
@@ -47,7 +61,7 @@ import { Consumer } from '../Context'
                             {(this.state.showContactToggle) ? (
                                  <ul className="list-group">
                                 
-                                <li className="list-group-item">{Tel}</li>
+                                <li className="list-group-item">{phone}</li>
                                 <li className="list-group-item">{email}</li>
                                 
                             </ul>

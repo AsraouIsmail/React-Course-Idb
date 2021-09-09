@@ -3,7 +3,7 @@
 import React from 'react'
 import classNames from 'classnames';
 
- function textInputGroup(props) {
+ function TextInputGroup(props) {
     return (
         <div className="form-group">
             <label htmlFor={props.name}>{props.label}</label>
@@ -17,4 +17,4 @@ import classNames from 'classnames';
         </div>
     )
 }
-export default textInputGroup;
+export default TextInputGroup;

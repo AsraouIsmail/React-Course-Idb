@@ -10,6 +10,7 @@ import About from './components/pages/About';
 import { Provider } from './components/Context';
 import AddContact from './components/contacts/AddContact';
 import PageNotFound from './components/pages/PageNotFound';
+import EditContact from './components/contacts/EditContact';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
          <Switch>
            <Route exact path="/" component={Contacts}/>
            <Route exact path="/contact/add" component={AddContact}/>
+           <Route exact path="/contact/edit/:id" component={EditContact}/>
            <Route exact path="/about/:id/:name" component={About}/>
            <Route component={PageNotFound}/>
          </Switch>
